@@ -1,0 +1,189 @@
+---
+title: "&#x1f52c; Visualización de datos"
+subtitle: "<br/> Módulo gráfico de R"
+author: "MSc. Ing. Luis Fernando Delgado Muñoz"
+institute: "Unidad Central del Valle"
+date: "2022"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - default
+      - rladies
+      - rladies-fonts
+      - sydney.css
+    seal: false  
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+library(knitr)                              # paquete que trae funciones utiles para R Markdown
+library(tidyverse)                          # paquete que trae varios paquetes comunes en el tidyverse
+library(datos)                              # paquete que viene con datos populares traducidos al español :)
+library(shiny)
+
+knitr::opts_chunk$set(echo = FALSE,         # FALSE: los bloques de código NO se muestran
+                      dpi = 300,            # asegura gráficos de alta resolución
+                      warning = FALSE,      # los mensajes de advertencia NO se muestran
+                      error = FALSE)        # los mensajes de error NO se muestran
+
+
+options(htmltools.dir.version = FALSE)
+```
+
+class: inverse, left, bottom
+background-image: url("img/back2.jpg")
+background-size: cover
+
+
+# **`r rmarkdown::metadata$title`**
+----
+
+## **`r rmarkdown::metadata$subtitle`**
+
+### `r rmarkdown::metadata$author`
+### `r rmarkdown::metadata$date`
+
+```{r xaringanExtra-share-again, echo=FALSE}
+xaringanExtra::use_share_again()
+```
+
+```{r xaringanExtra-scribble, echo=FALSE}
+xaringanExtra::use_scribble()
+```
+
+```{r xaringanExtra-freezeframe, echo=FALSE, eval=FALSE}
+xaringanExtra::use_freezeframe()
+```
+
+---
+
+class: inverse, middle, center
+background-image: url("img/back5.jpg")
+background-size: cover
+
+
+<br><br>
+
+.center[
+<img style="border-radius: 50%;" src="img/avatar.jpg"
+width="160px"/>
+
+
+### MSc. Ing. Luis Fernando Delgado Muñoz<br/>
+### Universidad Nacional de Colombia
+]
+
+<br>
+
+
+.center[
+
+ 
+*MSc. Ciencias Agrarias*
+ 
+*Ingeniero Agroindustrial*
+
+
+]
+
+
+---
+
+name: menu
+background-image: url("img/back3.jpg")
+background-size: cover
+class: left, middle, inverse
+
+# Contenido
+
+----
+
+
+.pull-left[
+### `r icon("project-diagram")` [Tipos de gráficos](#Tipos)
+
+### `r icon("sort-numeric-down")` [Univariados](#Univariados)
+
+### `r icon("list-ol")` [Bivariados](#Bivariados)
+
+### `r icon("buffer")` [Multivariados](#Multi)
+
+]
+
+---
+
+name: Tipos
+background-image: url("img/back6.jpg")
+background-size: cover
+class: inverse, center, middle
+
+# `r icon("project-diagram")`
+# Tipos de gráficos
+----
+
+.right[
+.bottom[
+####  [`r icon("bell")`](#menu)
+]
+]
+
+---
+
+# Tipos de gráficos
+
+----
+
+> ### 1. Gráficos Univariados:
+Los gráficos univariados trazan la distribución de datos de una sola variable. La variable puede ser categórica o cualitativa (raza, sexo,especie), ó cuantitativa (edad, peso, altura).
+
+<br>
+
+* **Cuantitativo:** La distribución de una sola variable cuantitativa
+se representa con un histograma, un diagrama de densidad de kernel o un diagrama de puntos.
+
+<br>
+
+* **Categórico:** La distribución de una sola variable categórica se representa con un gráfico de barras y un mapa de árbol.
+
+
+----
+
+---
+
+# Tipos de gráficos
+
+---- 
+
+> ### 2. Gráficos Bivariados:
+Los gráficos bivariados muestran la relación existente entre dos variables. El tipo de gráfico dependerá del nivel de medición de las variables (categóricas o cuantitativas).
+
+<br>
+
+* **Categórico `vs` Categórico:** se utilizan gráficos de barras apiladas, agrupadas o segmentadas.
+
+
+
+* **Cuantitativo `vs` Cuantitativo:** se muestra mediante diagramas de dispersión y gráficos de líneas.
+
+
+
+* **Categórico `vs` Cuantitativo:** Al trazar la relación entre una variable categórica y una variable cuantitativa, hay disponible una gran cantidad de tipos de gráficos. Estos incluyen gráficos de barras que utilizan estadísticas resumidas, gráficos de densidad de kernel agrupados, gráficos de caja uno al lado del otro, gráficos de violín uno al lado del otro, gráficos de media / sem, gráficos de crestas y gráficos de Cleveland.
+
+----
+
+---
+
+class: center, middle
+
+# 蟹蟹
+
+本幻灯片由 R 包 [**xaringan**](https://github.com/yihui/xaringan) 生成；
+
+查克拉来自于 [remark.js](https://remarkjs.com)、[**knitr**](https://yihui.org/knitr)、以及 [R Markdown](https://rmarkdown.rstudio.com)。
+
