@@ -61,6 +61,10 @@ xaringanExtra::use_scribble()
 xaringanExtra::use_freezeframe()
 ```
 
+```{r}
+xaringanExtra::use_webcam()
+```
+
 ---
 
 class: inverse, middle, center
@@ -134,6 +138,7 @@ class: inverse, center, middle
 ]
 
 ---
+name: Univariados
 
 # Tipos de gráficos
 
@@ -154,7 +159,9 @@ se representa con un histograma, un diagrama de densidad de kernel o un diagrama
 
 ----
 
+
 ---
+name: Bivariados
 
 # Tipos de gráficos
 
@@ -173,15 +180,1194 @@ Los gráficos bivariados muestran la relación existente entre dos variables. El
 
 
 
-* **Categórico `vs` Cuantitativo:** Al trazar la relación entre una variable categórica y una variable cuantitativa, hay disponible una gran cantidad de tipos de gráficos. Estos incluyen gráficos de barras que utilizan estadísticas resumidas, gráficos de densidad de kernel agrupados, gráficos de caja uno al lado del otro, gráficos de violín uno al lado del otro, gráficos de media / sem, gráficos de crestas y gráficos de Cleveland.
+* **Categórico `vs` Cuantitativo:** semuestran gráficos de barras que utilizan estadísticas resumidas, gráficos de densidad de kernel agrupados, gráficos de caja, gráficos de violín, gráficos de media, gráficos de crestas y gráficos de Cleveland.
+
+----
+
+
+---
+name: Multi
+
+# Tipos de gráficos
+
+
+----
+
+> ### 3. Gráficos Multivariados:
+Los gráficos multivariados muestran las relaciones entre tres o más variables. Hay dos métodos comunes para acomodar múltiples variables: agrupamiento y facetas.
+
+<br>
+
+* **Agrupación:** los valores de las dos primeras variables se asignan a los ejes x y y. Luego, las variables adicionales se asignan a otras características visuales como el color, la forma, el tamaño, el tipo de línea y la transparencia. La agrupación le permite trazar los datos de varios grupos en un solo gráfico.
+
+<br>
+
+* **Facetas o Parcelas:** permite trazar múltiples variables en un solo gráfico, utilizando características visuales como el color, la forma y el tamaño. En el facetado consta de varios gráficos separados o pequeños múltiplos, uno para cada nivel de una tercera variable o combinación de variables categóricas.
 
 ----
 
 ---
 
-class: center, middle
+# Tipos de gráficos
 
-# 蟹蟹
+----
+
+> ### 4. Otros gráficos:
+
+<br>
+
+* Dispersión 3D
+* Biplots
+* Burbujas
+* Diagramas de flujo
+* Mapas de calor
+* Radar
+* Matriz de dispersión
+* Cascada
+* Wordcloud
+
+----
+
+---
+
+name: Univariados
+background-image: url("img/back7.jpg")
+background-size: cover
+class: inverse, center, middle
+
+# `r icon("sort-numeric-down")`
+# Gráficos Univariados
+----
+
+.right[
+.bottom[
+####  [`r icon("bell")`](#menu)
+]
+]
+
+---
+
+name: Histograma
+
+# `r icon("sort-numeric-down")`  Histograma
+
+
+.left-column[
+* Un histograma es una representación gráfica de la distribución de una variable numérica.
+
+<br>
+* La variable se divide en varios contenedores y el número de observaciones por contenedor está representado por la altura de la barra.
+]
+
+.right-column[
+* Los histogramas se utilizan para estudiar la distribución de una o unas pocas variables.
+<br><br>
+* Verificar la distribución de sus variables una por una debe ser la primera tarea al obtener un nuevo conjunto de datos.
+<br><br>
+* Entrega una buena cantidad de información.
+<br><br>
+* El histograma permite comparar la distribución de algunas variables.
+]
+
+---
+
+# `r icon("sort-numeric-down")` Histograma
+
+### Errores comunes
+
+.pull-left[
+
+* probar con varios tamaños de contenedor puede llevar a conclusiones no acertadas.
+
+* No comparar más de 3 grupos en el mismo histograma. El gráfico se vuelve desordenado y difícilmente comprensible.
+
+
+]
+
+.pull-right[
+
+![](https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569_1280.jpg)
+
+**No confundir con un diagrama de barras**. `Un diagrama de barras da un valor para cada grupo de una variable categórica. Aqui se tiene una variable numérica.`
+
+]
+
+---
+
+# `r icon("sort-numeric-down")` Histograma
+
+Usando el dataset `iris` se examinára las longitudes de los sepalos.
+
+.pull-left[
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# Libraries
+library(datasets)
+data(iris, package = "datasets")
+
+# plot the age distribution using a histogram
+iris %>% ggplot(aes(x = Sepal.Length)) +
+  geom_histogram(color = "white",
+                 bins = 20) +
+  theme_bw() +
+  labs(title = "Longitud de los sepalos",
+       subtitle = "number of bins = 20",
+       x = "Longitud de los sepalos (cm)")
+```
+
+* `color = "white":` color del borde de las barras.
+* `bins = 20:` número de barras a dibujar.
+
+`La mayoría de las longitudes de los sépalos se encuentra entre los 5 y los 7 cemtimetros. Esta sería una distribución bimodal, puesto que se ve un pequeño grupo a los 5 cm y otro mas grande entre los 6 y 7 cm.`
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Libraries
+library(datasets)
+data(iris, package = "datasets")
+
+# plot the age distribution using a histogram
+iris %>% ggplot(aes(x = Sepal.Length)) +
+  geom_histogram(color = "white",
+                 bins = 20) +
+  theme_bw() +
+  labs(title = "Longitud de los sepalos",
+       subtitle = "number of bins = 20",
+       x = "Longitud de los sepalos (cm)")
+```
+
+]
+
+
+---
+
+# `r icon("sort-numeric-down")` Histograma
+
+### Comparación de Distribuciones
+
+.pull-left[
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("edge peak", 1000), rep("comb", 1000), rep("normal", 1000), rep("uniform", 1000), rep("bimodal", 1000), rep("skewed", 1000) ),
+  value = c( rnorm(900), rep(3, 100), rnorm(360, sd=0.5), rep(c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75), 80), rnorm(1000), runif(1000), rnorm(500, mean=-2), rnorm(500, mean=2), abs(log(rnorm(1000))) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value)) +
+    geom_histogram(fill="#69b3a2", color="#e9ecef", alpha=0.9) +
+    facet_wrap(~type, scale="free_x") +
+    theme_bw() +
+    theme(
+      panel.spacing = unit(0.1, "lines"),
+      axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank()
+    )
+```
+
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("edge peak", 1000), rep("comb", 1000), rep("normal", 1000), rep("uniform", 1000), rep("bimodal", 1000), rep("skewed", 1000) ),
+  value = c( rnorm(900), rep(3, 100), rnorm(360, sd=0.5), rep(c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75), 80), rnorm(1000), runif(1000), rnorm(500, mean=-2), rnorm(500, mean=2), abs(log(rnorm(1000))) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value)) +
+    geom_histogram(fill="#69b3a2", color="black", alpha=0.9) +
+    facet_wrap(~type, scale="free_x") +
+    theme_bw() +
+    theme(
+      panel.spacing = unit(0.1, "lines"),
+      axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank()
+    )
+```
+
+
+]
+
+---
+
+# `r icon("sort-numeric-down")` Histograma
+
+### Comparación de Distribuciones
+
+.pull-left[
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("variable 1", 1000), rep("variable 2", 1000) ),
+  value = c( rnorm(1000), rnorm(1000, mean=4) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value, fill=type)) +
+    geom_histogram(color="black", alpha=0.4) +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) +
+    theme_bw() +
+    labs(fill="")
+```
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("variable 1", 1000), rep("variable 2", 1000) ),
+  value = c( rnorm(1000), rnorm(1000, mean=4) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value, fill=type)) +
+    geom_histogram( color="black", alpha=0.6) +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) +
+    theme_bw() +
+    labs(fill="")
+```
+
+]
+
+---
+
+name: Densidad
+
+# `r icon("bacon")` Densidad
+
+
+Una gráfica de densidad es una representación de la distribución de una variable numérica. Utiliza una estimación de densidad de kernel para mostrar la función de densidad de probabilidad de la variable.
+
+**Es una versión suavizada del histograma y se utiliza en el mismo concepto.**
+
+`La estimación de la densidad de kernel  es un método no paramétrico de estimar la función de densidad de probabilidad de una variable aleatoria continua. No es paramétrico porque no asume ninguna distribución subyacente para la variable. Esencialmente, en cada datum, se crea una función de kernel con el datum en su centro; esto asegura que el kernel sea simétrico con respecto al datum. Luego, el PDF se estima agregando todas estas funciones del kernel y dividiendo por la cantidad de datos para garantizar que satisfaga las 2 propiedades de un PDF:`
+
+`Cada valor posible del PDF (es decir, la función f (x)) no es negativo. La integral definida del PDF sobre su conjunto de soporte es igual a 1.`
+
+
+> Las gráficas de densidad se utilizan para estudiar la distribución de una o unas pocas variables. Verificar la distribución de sus variables una por una es probablemente la primera tarea que debe hacer cuando obtiene un nuevo conjunto de datos. Entrega una buena cantidad de información.
+
+---
+
+# `r icon("bacon")` Densidad
+
+
+Básicamente es un histograma suavizado, donde el área debajo de la curva es igual a uno.
+
+.pull-left[
+
+<br><br>
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# Create a kernel density plot 
+
+iris %>% ggplot(aes(x = Petal.Length)) +
+  geom_density(fill = "yellow", color = "blue") +
+  theme_bw() +
+  labs(title = "Longitud de los pétalos",
+       x = "Longitud de los pétalos (cm)")
+```
+
+> Al igual que con los gráficos anteriores, podemos usa `fill` y `color` para especificar los colores de relleno y borde.
+
+> El gráfico muestra la distribución de la longitud de los pétalos. Se puede obervar claramente una distribución bimodal, con sus dos grandes picos en 1 y 5 cm.
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Create a kernel density plot 
+iris %>% ggplot(aes(x = Petal.Length)) +
+  geom_density(fill = "yellow", color = "blue") +
+  theme_bw() +
+  labs(title = "Longitud de los pétalos",
+       x = "Longitud de los pétalos (cm)")
+```
+
+
+]
+
+---
+
+
+
+# `r icon("bacon")` Densidad
+
+
+### Comparar densidades
+
+.pull-left[
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("edge peak", 1000), rep("comb", 1000), rep("normal", 1000), rep("uniform", 1000), rep("bimodal", 1000), rep("skewed", 1000) ),
+  value = c( rnorm(900), rep(3, 100), rnorm(360, sd=0.5), rep(c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75), 80), rnorm(1000), runif(1000), rnorm(500, mean=-2), rnorm(500, mean=2), abs(log(rnorm(1000))) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value)) +
+    geom_density(fill="#69b3a2", color="black", alpha=0.9, adjust = 0.5) +
+    facet_wrap(~type, scale="free") +
+    theme_bw() +
+    theme(
+      panel.spacing = unit(0.1, "lines"),
+      axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank()
+    )
+```
+
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("edge peak", 1000), rep("comb", 1000), rep("normal", 1000), rep("uniform", 1000), rep("bimodal", 1000), rep("skewed", 1000) ),
+  value = c( rnorm(900), rep(3, 100), rnorm(360, sd=0.5), rep(c(-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75), 80), rnorm(1000), runif(1000), rnorm(500, mean=-2), rnorm(500, mean=2), abs(log(rnorm(1000))) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value)) +
+    geom_density(fill="#69b3a2", color="black", alpha=0.9, adjust = 0.5) +
+    facet_wrap(~type, scale="free") +
+    theme_bw() +
+    theme(
+      panel.spacing = unit(0.1, "lines"),
+      axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank()
+    )
+```
+
+
+]
+
+
+---
+
+
+
+# `r icon("bacon")` Densidad
+
+
+### Comparar densidades
+
+.pull-left[
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("variable 1", 1000), rep("variable 2", 1000) ),
+  value = c( rnorm(1000), rnorm(1000, mean=4) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value, fill=type)) +
+    geom_density( color="black", alpha=0.6) +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) +
+    theme_bw() +
+    labs(fill="")
+```
+
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Build dataset with different distributions
+data <- data.frame(
+  type = c( rep("variable 1", 1000), rep("variable 2", 1000) ),
+  value = c( rnorm(1000), rnorm(1000, mean=4) )
+)
+
+# Represent it
+data %>%
+  ggplot( aes(x=value, fill=type)) +
+    geom_density( color="black", alpha=0.6) +
+    scale_fill_manual(values=c("#69b3a2", "#404080")) +
+    theme_bw() +
+    labs(fill="")
+```
+
+
+]
+
+---
+
+# `r icon("chart-bar")` Diagrama de barras
+
+El conjunto de datos de algodón contiene los registros de 96 observaciones de un experimento llevado a cabo en dos localidades en Perú: Lima y Pisco. A continuación, se utiliza un gráfico de barras para mostrar el promedio de rendimiento de algodón por genotipos.
+
+.pull-left[
+
+<br>
+
+
+
+----
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+library(agricolae)
+data(cotton, package = "agricolae")
+
+cotton %>% ggplot(aes(x = reorder(factor(lineage), yield), y = yield, fill = factor(lineage))) +
+geom_bar(stat = "summary", 
+           color="black") +
+  theme_bw() +
+  labs(x = "Genotipos", y = "Promedio de rendimiento (kg)")
+```
+
+----
+
+<br>
+El genotipo 2 fue el que mas rendimiento tuvo, seguido del 1, 3 y finalmente el 4.
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 5 }
+library(agricolae)
+data(cotton, package = "agricolae")
+
+cotton %>% ggplot(aes(x = reorder(factor(lineage), yield), y = yield, fill = factor(lineage))) +
+geom_bar(stat = "summary", 
+           color="black") +
+  theme_bw() +
+  labs(x = "Genotipos", y = "Promedio de rendimiento (kg)")
+```
+
+
+]
+
+---
+
+name: Bivariados
+background-image: url("https://cdn.pixabay.com/photo/2016/02/25/22/09/coffee-beans-1223055_1280.jpg")
+background-size: cover
+class: inverse, center, middle
+
+
+
+
+
+# `r icon("list-ol")`
+# Gráficos Bivariados
+----
+
+.right[
+.bottom[
+####  [`r icon("bell")`](#menu)
+]
+]
+
+---
+
+# `r icon("chart-bar")` Barras apiladas
+
+
+Al trazar la relación entre dos variables categóricas, normalmente se utilizan gráficos de barras apiladas, agrupadas o segmentadas.
+
+
+.pull-left[
+
+El siguiente gráfico muestra la relación entre la clase de automóvil y el tipo de tracción (rueda delantera, trasera o tracción en las 4 ruedas) para los automóviles en el dataset (mpg).
+
+----
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+library(ggplot2)
+
+# stacked bar chart
+ggplot(mpg,
+       aes(x = class,
+           fill = drv)) +
+  geom_bar(position = "dodge", color = "black") +
+  theme_bw()
+```
+
+----
+
+El vehículo más común es el SUV. Todos los autos de 2 plazas tienen tracción trasera, mientras que la mayoría, pero no todos los SUV, tienen tracción en las 4 ruedas.
+
+
+]
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+library(ggplot2)
+
+# stacked bar chart
+ggplot(mpg,
+       aes(x = class,
+           fill = drv)) +
+  geom_bar(position = "dodge", color = "black") +
+  theme_bw()
+```
+
+
+]
+
+---
+
+# `r icon("chart-bar")` Barras: Resumen de Media
+
+> También se pueden utilizar gráficos de barras para mostrar otros estadísticos de resumen (por ejemplo, medias o medianas) en una variable cuantitativa para cada nivel de una variable categórica.
+
+> Por ejemplo, el siguiente gráfico muestra el salario medio en dolares anuales de una muestra de profesores universitarios por rango académico.
+
+.pull-left[
+
+----
+
+.scroll-box-14[
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+data(Salaries, package="carData")
+
+# calculate mean salary for each rank
+library(dplyr)
+plotdata <- Salaries %>%
+  group_by(rank) %>%
+  summarize(mean_salary = mean(salary))
+
+# plot mean salaries in a more attractive fashion
+library(scales)
+ggplot(plotdata,
+       aes(x = factor(rank,
+                      labels = c("Assistant\nProfessor",
+                                 "Associate\nProfessor",
+                                 "Full\nProfessor")),
+                      y = mean_salary)) +
+  geom_bar(stat = "identity",
+           fill = "cornflowerblue", color = "black") +
+  geom_text(aes(label = dollar(mean_salary)),
+            vjust = -0.25) +
+  scale_y_continuous(breaks = seq(0, 130000, 20000),
+                     label = dollar) +
+  labs(title = "Mean Salary by Rank",
+       subtitle = "9-month academic salary for 2008-2009",
+       x = "",
+       y = "") +
+  theme_bw()
+```
+]
+
+----
+
+]
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 5 }
+data(Salaries, package="carData")
+
+# calculate mean salary for each rank
+library(dplyr)
+plotdata <- Salaries %>%
+  group_by(rank) %>%
+  summarize(mean_salary = mean(salary))
+
+# plot mean salaries in a more attractive fashion
+library(scales)
+ggplot(plotdata,
+       aes(x = factor(rank,
+                      labels = c("Assistant\nProfessor",
+                                 "Associate\nProfessor",
+                                 "Full\nProfessor")),
+                      y = mean_salary)) +
+  geom_bar(stat = "identity",
+           fill = "cornflowerblue", color = "black") +
+  geom_text(aes(label = dollar(mean_salary)),
+            vjust = -0.25) +
+  scale_y_continuous(breaks = seq(0, 130000, 20000),
+                     label = dollar) +
+  labs(title = "Mean Salary by Rank",
+       subtitle = "9-month academic salary for 2008-2009",
+       x = "",
+       y = "") +
+  theme_bw()
+```
+
+
+]
+
+---
+
+# `r icon("spinner")` Diagramas de dispersión
+
+
+La visualización más simple de dos variables cuantitativas es un diagrama de dispersión, donde cada variable es representada en cada eje. Por ejemplo, al utilizar el conjunto de datos `Salaries`, se puede graficar la experiencia docente universitaria *(yrs.since.phd)* frente al salario académico *(salary)* de los profesores.
+
+
+.pull-left[
+
+----
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+library(ggplot2)
+data(Salaries, package="carData")
+
+# simple scatterplot
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary)) +
+  geom_point(aes(
+           color = sex), size  = 2) +
+  geom_smooth(method = "lm", se = F) +
+  theme_bw() +
+  labs(x = "Experiencia doctoral (años)", y = "Salario anual (miles USD)",
+       title = "Experiencia vs. Salario")
+```
+
+]
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 5 }
+library(ggplot2)
+data(Salaries, package="carData")
+
+# simple scatterplot
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary)) +
+  geom_point(aes(
+           color = sex), size  = 2) +
+  geom_smooth(method = "lm", se = F) +
+  theme_bw() +
+  labs(x = "Experiencia doctoral (años)", y = "Salario anual (miles USD)",
+       title = "Experiencia vs. Salario")
+```
+
+
+]
+
+---
+
+# `r icon("people-carry")` Boxplot
+
+
+Un diagrama de caja ofrece un buen resumen de una o más variables numéricas. Un diagrama de caja se compone de varios elementos: <br/>
+
+* La línea que divide la caja  en 2 partes representa la mediana de los datos. Si la mediana es 10, significa que hay el mismo número de puntos de datos por debajo y por encima de 10. <br/>
+
+* Los extremos de la caja muestran los cuartiles superior (Q3) e inferior (Q1). Si el tercer cuartil es 15, significa que el 75% de las observaciones son inferiores a 15. <br/>
+
+* La diferencia entre los cuartiles 1 y 3 se llama rango intercuartil (IQR). <br/>
+
+* Las líneas extremas muestran Q3 + 1.5xIQR y Q1-1.5xIQR (el valor más alto y más bajo excluyendo los valores atípicos u outliers).<br/>
+
+* Los puntos por fuera de las líneas extremas muestran valores atípicos.
+
+
+---
+
+# `r icon("people-carry")` Boxplot
+
+
+### Diagrama de caja o Boxplot
+
+<center><img src="https://help.ezbiocloud.net/wp-content/uploads/2020/04/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2020-04-19-%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB-9.41.35.png"height="400px" /></center>
+
+
+---
+
+# `r icon("people-carry")` Boxplot
+
+.pull-left[
+
+* `Un diagrama de caja puede resumir la distribución de una variable numérica para varios grupos.`
+<br><br>
+* `El problema es que resumir también significa perder información y eso puede ser una trampa.`
+<br><br>
+* `Si consideramos el diagrama de caja a continuación, es fácil concluir que el grupo Ctiene un valor más alto que los demás.`
+<br><br>
+* `Sin embargo, no podemos ver la distribución subyacente de puntos en cada grupo o su número de observaciones.`
+
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Libraries
+library(tidyverse)
+library(viridis)
+
+# create a dataset
+data <- data.frame(
+  name=c( rep("A",500), rep("B",500), rep("B",500), rep("C",20), rep('D', 100)  ),
+  value=c( rnorm(500, 10, 5), rnorm(500, 13, 1), rnorm(500, 18, 1), rnorm(20, 25, 4), rnorm(100, 12, 1) )
+)
+
+# Plot
+data %>%
+  ggplot( aes(x=name, y=value, fill=name)) +
+    geom_boxplot() +
+    scale_fill_viridis(discrete = TRUE) +
+    theme_bw() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    xlab("")
+```
+
+
+]
+
+---
+
+
+# `r icon("people-carry")` Boxplot
+
+
+
+
+.pull-left[
+
+> Los diagramas de caja lado a lado son muy útiles para comparar grupos, es decir, los niveles de una variable categórica en una variable numérica.
+
+----
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 6}
+# plot the distribution of salaries by rank using boxplots
+ggplot(Salaries,
+       aes(x = rank,
+           y = salary)) +
+  geom_boxplot(aes(fill = rank)) +
+  theme_bw() +
+  labs(title = "Salary distribution by rank")
+```
+----
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# plot the distribution of salaries by rank using boxplots
+ggplot(Salaries,
+       aes(x = rank,
+           y = salary)) +
+  geom_boxplot(aes(fill = rank)) +
+  theme_bw() +
+  labs(title = "Salary distribution by rank")
+```
+]
+
+---
+
+# `r icon("people-carry")` Boxplot
+
+Si la cantidad de datos con la que está trabajando no es demasiado grande, agregar `jitter` ó las observaciones sobre el diagrama de caja puede hacer que el gráfico sea más revelador.
+
+.pull-left[
+
+
+>Aquí aparecen claramente algunos patrones nuevos.
+
+----
+
+
+> El grupo C tiene un tamaño de muestra pequeño en comparación con los otros grupos.
+
+----
+
+> Definitivamente, esto es algo que debe averiguar antes de decir que el grupo C tiene un valor más alto que los demás.
+
+----
+
+>Además, parece que el grupo B tiene un bimodal distribution: los puntos se distribuyen en 2 grupos: alrededor de y = 18 e y = 13.
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# Plot
+data %>%
+  ggplot( aes(x=name, y=value, fill=name)) +
+    geom_boxplot() +
+    scale_fill_viridis(discrete = TRUE) +
+    geom_jitter(color="red", size=0.7, alpha=0.8, width = 0.3) +
+    theme_bw() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=11)
+    ) +
+    ggtitle("A boxplot with jitter") +
+    xlab("")
+```
+
+
+]
+
+---
+
+# `r icon("people-carry")` Boxplot
+
+
+###  Boxplot agrupado en paneles
+
+
+.pull-left[
+
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# library
+library(ggplot2)
+
+# create a data frame
+variety <- rep(LETTERS[1:7], each=40)
+treatment <- rep(c("high","low"),each=20)
+note <- seq(1:280)+sample(1:150, 280, replace=T)
+data <- data.frame(variety, treatment ,  note)
+
+# one box per variety
+ggplot(data, aes(x=variety, y=note, fill=treatment)) +
+    geom_boxplot() +
+    theme_bw() +
+    facet_wrap(~variety, scale="free")
+```
+
+**Importante la función facet_wrap()**
+
+]
+
+
+.pull-right[
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# library
+library(ggplot2)
+
+# create a data frame
+variety <- rep(LETTERS[1:7], each=40)
+treatment <- rep(c("high","low"),each=20)
+note <- seq(1:280)+sample(1:150, 280, replace=T)
+data <- data.frame(variety, treatment ,  note)
+
+# one box per variety
+ggplot(data, aes(x=variety, y=note, fill=treatment)) +
+    geom_boxplot() +
+    theme_bw() +
+    facet_wrap(~variety, scale="free")
+```
+
+
+]
+
+
+---
+
+
+name: Multi
+background-image: url("https://cdn.pixabay.com/photo/2017/09/24/17/19/cow-2782461_1280.jpg")
+background-size: cover
+class: inverse, center, middle
+
+
+# `r icon("buffer")`
+# Gráficos Multivariados
+----
+
+.right[
+.bottom[
+####  [`r icon("bell")`](#menu)
+]
+]
+
+---
+
+# `r icon("delicious")` Agrupación
+
+En la agrupación, los valores de las dos primeras variables se asignan a la x y Y ejes. Luego, las variables adicionales se asignan a otras características visuales conocidas como los elementos esteticos como el color, la forma, el tamaño, el tipo de línea y la transparencia. La agrupación permite trazar datos de varios grupos en un solo gráfico.
+
+
+### Variables salario y años de experiencia doctoral.
+
+
+.pull-left[
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+library(ggplot2)
+data(Salaries, package="carData")
+
+# plot experience vs. salary
+# (color represents rank, shape represents sex)
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary,
+           color = rank,
+           shape = sex)) +
+  geom_point(size = 3,
+             alpha = .6) +
+  theme_bw() +
+  labs(title = "Academic salary by rank, sex, and years since degree")
+```
+]
+
+
+.pull-right[
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 4.5 }
+library(ggplot2)
+data(Salaries, package="carData")
+
+# plot experience vs. salary
+# (color represents rank, shape represents sex)
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary,
+           color = rank,
+           shape = sex)) +
+  geom_point(size = 3,
+             alpha = .6) +
+  theme_bw() +
+  labs(title = "Academic salary by rank, sex, and years since degree")
+```
+
+
+]
+
+---
+
+# `r icon("delicious")` Facetas
+
+
+En el facetado, un gráfico consta de varios gráficos separados o pequeños múltiplos, uno para cada nivel de una tercera variable o combinación de variables.
+
+
+----
+
+.pull-left[
+
+
+
+
+`1.` `facet_wrap()` hace una cinta larga de paneles (generada por cualquier número de variables) y la envuelve en 2D. Esto es útil si tiene una sola variable con muchos niveles y desea organizar los gráficos de una manera más eficiente en cuanto al espacio.
+
+* La función `facet_wrap` crea un gráfico independiente para cada nivel de la `variable` dada. La opción `ncol` controla el número de columnas.
+
+```r
+facet_wrap(~variable, ncol = 1)
+```
+
+`facet_wrap(~variable)` devolverá una matriz simétrica de gráficos para el número de niveles de variable.
+
+----
+
+]
+
+.pull-right[
+
+
+`2.` `facet_grid()` Forma una matriz de paneles definidos por variables de facetas de filas y columnas. Es más útil cuando se tiene dos variables discretas y todas las combinaciones de las variables existen en los datos. Puede usar múltiples variables en las filas o columnas, "agregándolas" juntas, por ejemplo a + b ~ c + d.
+
+
+```r
+facet_grid( row variable(s) ~ column variable(s))
+```
+
+`facet_grid(.~variable)` devolverá facetas iguales a los niveles de variable distribuido horizontalmente.
+
+`facet_grid(variable~.)` Ahora, la distribución es vertical.
+
+----
+
+]
+
+---
+
+# `r icon("delicious")` Facetas ejemplos
+
+.pull-left[
+
+### Código de facet_wrap
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 5}
+# plot salary histograms by rank
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary)) +
+  geom_point(aes(
+           color = sex), size  = 2) +
+  theme_bw() +
+  labs(x = "Experiencia doctoral (años)", y = "Salario anual (miles USD)",
+       title = "Experiencia vs. Salario") +
+  facet_wrap(~rank)
+```
+]
+
+
+
+.pull-right[ 
+### Código de facet_grid
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 5}
+# plot salary histograms by rank and sex
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary / 1000)) +
+  geom_point(aes(
+           color = sex), size  = 2) +
+  theme_bw() +
+  labs(x = "Experiencia doctoral (años)", y = "Salario anual (miles USD)",
+       title = "Experiencia vs. Salario") +
+  facet_grid(sex ~ rank)
+```
+
+]
+
+---
+
+.pull-left[ 
+
+# `r icon("delicious")` Gráfico de facet_wrap
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6}
+# plot salary histograms by rank
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary)) +
+  geom_point(aes(
+           color = sex), size  = 2) +
+  theme_bw() +
+  labs(x = "Experiencia doctoral (años)", y = "Salario anual (miles USD)",
+       title = "Experiencia vs. Salario") +
+  facet_wrap(~rank)
+
+```
+
+]
+
+.pull-right[ 
+
+# `r icon("delicious")` Gráfico de facet_grid
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6}
+# plot salary histograms by rank and sex
+ggplot(Salaries,
+       aes(x = yrs.since.phd,
+           y = salary / 1000)) +
+  geom_point(aes(
+           color = sex), size  = 2) +
+  theme_bw() +
+  labs(x = "Experiencia doctoral (años)", y = "Salario anual (miles USD)",
+       title = "Experiencia vs. Salario") +
+  facet_grid(sex ~ rank)
+```
+
+]
+
+---
+
+# `r icon("delicious")` Agrupación & Facet
+
+
+.pull-left[
+
+
+```{r eval=FALSE, echo=TRUE, message=FALSE, warning=FALSE , fig.height = 4}
+# plot life expectancy by year separately
+# for each country in the Americas
+data(gapminder, package = "gapminder")
+
+# Select the Americas data
+plotdata <- dplyr::filter(gapminder,
+                          continent == "Americas")
+
+# plot life expectancy by year, for each country
+ggplot(plotdata, aes(x=year, y = lifeExp)) +
+  geom_line(color="grey") +
+  geom_point(color="blue") +
+  facet_wrap(~country) +
+  theme_minimal(base_size = 9) +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 1)) +
+  labs(title = "Changes in Life Expectancy",
+       x = "Year",
+       y = "Life Expectancy")
+```
+]
+
+
+.pull-right[
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE , fig.height = 6 }
+# plot life expectancy by year separately
+# for each country in the Americas
+data(gapminder, package = "gapminder")
+
+# Select the Americas data
+plotdata <- dplyr::filter(gapminder,
+                          continent == "Americas")
+
+# plot life expectancy by year, for each country
+ggplot(plotdata, aes(x=year, y = lifeExp)) +
+  geom_line(color="grey") +
+  geom_point(color="blue") +
+  facet_wrap(~country) +
+  theme_minimal(base_size = 9) +
+  theme(axis.text.x = element_text(angle = 45,
+                                   hjust = 1)) +
+  labs(title = "Changes in Life Expectancy",
+       x = "Year",
+       y = "Life Expectancy")
+```
+
+
+]
+
+---
+
+background-image: url("https://cdn.pixabay.com/photo/2020/09/24/16/12/roosters-5599141_1280.jpg")
+background-size: cover
+class: inverse, center, middle
+
+
+# Muchas gracias
 
 本幻灯片由 R 包 [**xaringan**](https://github.com/yihui/xaringan) 生成；
 
