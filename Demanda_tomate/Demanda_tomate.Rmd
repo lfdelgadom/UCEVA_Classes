@@ -2,12 +2,16 @@
 title: "Demanda de tomate"
 author: "Luis Fernando Delgado Muñoz"
 date: "22/3/2022"
-output: html_document
+output:
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
+knitr::opts_chunk$set(
+	echo = F,
+	message = FALSE,
+	warning = FALSE
+)
 library(tidyverse)
 ```
 
@@ -19,7 +23,7 @@ library(readr)
 tomate <- read_delim("../Demanda_tomate/Datos_tomate.csv", 
     delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-tomate
+knitr::kable(tomate)
 ```
 
 # Tidy data
@@ -29,7 +33,50 @@ tomate <- tomate %>% pivot_longer(c("Lunes", "Martes", "Miercoles", "Jueves", "V
 
 tomate$Semana = as.factor(tomate$Semana)
 
-tomate
 ```
+
+```{r fig.align='center', fig.width= 12, fig.height= 10}
+tomate %>% 
+  ggplot(aes(x = reorder(Dias_semana, Demanda), y = Demanda)) +
+  #facet_wrap(~Semana) +
+  geom_boxplot(aes(fill = Dias_semana)) +
+  geom_jitter(width = 0.2, size = 2) +
+  theme_bw() +
+  labs(x = "Días", y = "Demanda (t)", title = "Demanda de tomate semanal por 30 semanas") 
+```
+
+```{r fig.align='center', fig.width= 12, fig.height= 10}
+tomate %>% 
+  ggplot(aes(x = reorder(Dias_semana, Demanda), y = Demanda)) +
+  facet_wrap(~Semana) +
+  geom_jitter(aes(shape = Dias_semana), size = 3) +
+  scale_shape_manual(values=c(1:7)) +
+  theme_bw() +
+  theme(axis.text.x = element_text(hjust = 1 , angle = 90)) +
+  labs(x = "Días", y = "Demanda (t)", title = "Demanda de tomate semanal por 30 semanas") 
+```
+```{r fig.align='center', fig.width= 12, fig.height= 10}
+tomate_se <- tomate %>% group_by(Semana) %>% summarize(n = n(),
+         mean = mean(Demanda),
+         sd = sd(Demanda),
+         se = sd / sqrt(n),
+         ci = qt(0.975, df = n - 1) * sd / sqrt(n))  
+
+knitr::kable(tomate_se %>% select(-c(n, se, ci)))
+```
+
+```{r fig.align='center', fig.width= 12, fig.height= 10}
+tomate_se %>% ggplot(aes(x = reorder(Semana, mean),
+           y = mean,
+           group = 1)) +
+  geom_point(size = 3) +
+  geom_errorbar(aes(ymin = mean - se,
+                    ymax = mean + se),
+                width = .1) +
+  theme_bw() +
+  labs(x = "Semana", y = "Promedio de demanda (t)")
+```
+
+Cual fue la semana con mayor demanda y cual fue la semana con menor variación
 
 
