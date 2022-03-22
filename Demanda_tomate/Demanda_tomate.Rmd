@@ -1,0 +1,35 @@
+---
+title: "Demanda de tomate"
+author: "Luis Fernando Delgado Muñoz"
+date: "22/3/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+
+# Carga de datos
+
+```{r}
+library(readr)
+tomate <- read_delim("../Demanda_tomate/Datos_tomate.csv", 
+    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+tomate
+```
+
+# Tidy data
+
+```{r}
+tomate <- tomate %>% pivot_longer(c("Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"), names_to = "Dias_semana", values_to = "Demanda")
+
+tomate$Semana = as.factor(tomate$Semana)
+
+tomate
+```
+
+
