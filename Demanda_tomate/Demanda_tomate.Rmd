@@ -76,7 +76,35 @@ tomate_se %>% ggplot(aes(x = reorder(Semana, mean),
   theme_bw() +
   labs(x = "Semana", y = "Promedio de demanda (t)")
 ```
+# Carga de datos de salchichas
 
-Cual fue la semana con mayor demanda y cual fue la semana con menor variación
+```{r}
+salchichas <- read.csv("../Demanda_tomate/Salchichas.csv", header=TRUE, sep=";")
+
+salchichas$Maquina <- factor(salchichas$Maquina,
+                              labels = c("Maquina 1",
+                                         "Maquina 2"))
+salchichas_wider <- salchichas %>%
+  group_by(Maquina) %>%
+  mutate(row = row_number()) %>% pivot_wider(names_from = Maquina, values_from = Peso) %>%  select(-row)
+
+knitr::kable(salchichas_wider)
+```
+
+```{r fig.align='center', fig.width= 10, fig.height= 8}
+salchichas$Interaccion <- paste(salchichas$Operario,salchichas$Maquina, sep=":")
+
+ggplot(salchichas, aes(x = Interaccion, y = Peso, fill = Interaccion)) +
+        geom_boxplot() +
+        geom_jitter(color = "black", width = 0.1, alpha = 0.3) +
+        theme_bw() +
+        labs(x = "Interacción entre operarios y embutidoras", 
+             y = "Peso salchichas (g)", 
+             title = "Pesos de salchichas en función de operarios y embutidoras") +
+        geom_hline(yintercept = c(210, 230), linetype = "dotted", 
+                   color = "red", size = 2)
+```
+
+
 
 
